@@ -6,9 +6,6 @@
 </head>
 <body>
 <form class="container" action="/practicecreate" method="post">
-    <!-- CSRF Protection -->
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
     <div class="mb-3">
         <label class="form-label">제목</label>
         <input type="text" class="form-control" name="title" required>

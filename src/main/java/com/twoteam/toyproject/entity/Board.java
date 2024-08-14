@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Table(name = "board")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,7 @@ public class Board {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private String memberName; // 작성자 이름
+    @ManyToOne
+    @JoinColumn(name = "member_id") // 외래 키 컬럼 설정
+    private Member member; // 게시판 작성자를 나타내는 필드
 }

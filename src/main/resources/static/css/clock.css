@@ -1,0 +1,39 @@
+/* 디지털 시계 스타일 */
+.digital-clock {
+    font-family: 'Digital-7', sans-serif; /* 디지털 스타일 폰트 */
+    font-size: 4em; /* 시계 크기 */
+    color: #ff6700; /* 주황색 텍스트 색상 */
+    text-align: center;
+    background: linear-gradient(145deg, #333, #666); /* 시계 배경 그라디언트 회색 */
+    padding: 20px;
+    border-radius: 10px; /* 둥근 모서리 */
+    width: auto; /* 자동 너비 조정 */
+    max-width: 400px; /* 최대 너비 설정 */
+    display: flex; /* 플렉스 박스 레이아웃 사용 */
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    box-shadow: 0 0 25px rgba(255, 103, 0, 0.6); /* 주황색 네온 효과를 위한 그림자 */
+    border: 1px solid #ff6700; /* 주황색 시계 외곽선 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* 숫자 스타일 */
+.digital-clock span {
+    display: inline-block;
+    min-width: 70px; /* 숫자 최소 너비 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* 애니메이션 효과 */
+@keyframes glow {
+    0% { text-shadow: 0 0 5px rgba(255, 103, 0, 0.7); }
+    50% { text-shadow: 0 0 20px rgba(255, 103, 0, 1); }
+    100% { text-shadow: 0 0 5px rgba(255, 103, 0, 0.7); }
+}
+
+.digital-clock span {
+    animation: glow 1.5s ease-in-out infinite; /* 네온 글로우 애니메이션 */
+}
+
+/* 폰트 불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Digital-7&display=swap');

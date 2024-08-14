@@ -3,9 +3,9 @@ package com.twoteam.toyproject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Getter
+@Entity@Getter
 @Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

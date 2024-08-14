@@ -3,23 +3,28 @@
     <thead>
     <tr>
         <th scope="col">Id</th>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
+        <th scope="col">제목</th>
+        <th scope="col">내용</th>
+        <th scope="col">작성자</th> <!-- 작성자 추가 -->
+        <th scope="col">작성자MBTI</th>
     </tr>
     </thead>
     <tbody>
     {{#boardList}}
         <tr>
             <th>{{id}}</th>
-            <td><a href="board/{{id}}">{{title}}</a></td>
+            <td><a href="/board/{{id}}">{{title}}</a></td>
             <td>{{content}}</td>
+            <td>{{member.memberName}}</td> <!-- 작성자 표시 -->
+            <td>{{member.memberMBTI}}</td>
         </tr>
     {{/boardList}}
     </tbody>
 </table>
-<button type="button" class="btn btn-primary" style="background-color: #FA7C06; border: none;">
-    <a href="/board/write" style="color: white; text-decoration: none;">글작성</a>
+<button type="button" class="btn btn-primary" style="background-color: #FA7C06; border: none;" onclick="console.log('Button clicked'); location.href='/board/write'">
+    글작성
 </button>
+
 {{>layouts/footer}}
 <style>
     /* 추가된 CSS */

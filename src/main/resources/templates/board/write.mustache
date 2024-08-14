@@ -1,14 +1,16 @@
 {{>layouts/header}}
-<form class="container" action="/board/create" method="post">
+<form class="container" action="/boardcreate" method="post">
+    <!-- CSRF Protection -->
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
     <div class="mb-3">
         <label class="form-label">제목</label>
-        <input type="text" class="form-control" name="title">
+        <input type="text" class="form-control" name="title" required>
     </div>
     <div class="mb-3">
         <label class="form-label">내용</label>
-        <textarea class="form-control" rows="3" name="content"></textarea>
+        <textarea class="form-control" rows="3" name="content" required></textarea>
     </div>
-    <input type="hidden" name="memberName" value="{{memberName}}">
     <button type="submit" class="btn btn-primary" style="background-color: #FA7C06; border: none;">Submit</button>
 </form>
 <a href="/board">뒤로가기</a>

@@ -17,7 +17,11 @@ spring:
     password: 1234
   thymeleaf:
     cache: false
-
+  jpa:
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 #  mail:
 #    host: smtp.gmail.com
 #    port: 587
@@ -30,9 +34,5 @@ spring:
 #          starttls:
 #            enable: true
 
-# spring data jpa 설정
-jpa:
-  open-in-view: true
-  show-sql: true
-  hibernate:
-    ddl-auto: update
+
+

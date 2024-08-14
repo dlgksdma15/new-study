@@ -1,2 +1,65 @@
-package com.twoteam.toyproject.controller;public class TodoController {
+package com.twoteam.toyproject.controller;
+
+import com.twoteam.toyproject.dto.MemberDTO;
+import com.twoteam.toyproject.entity.ToDoEntity;
+import com.twoteam.toyproject.service.ToDoService;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@Controller
+public class ToDoController {
+
+    private final ToDoService toDoService;
+
+    @GetMapping("/todo")
+    public String list(Model model, HttpSession session) {
+        if (session.getAttribute("loginMember") == null) {
+            return "index";
+        }
+        MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+        String userEmail = loginMember.getMemberEmail();
+        List<ToDoEntity> toDoEntityList = this.toDoService.subAllByEmail(userEmail);
+        model.addAttribute("toDoEntityList", toDoEntityList);
+        return "todolist";
+    }
+
+    @PostMapping("/todo/create")
+    public String todoCreate(@RequestParam String email, @RequestParam String content) {
+        toDoService.create(email ,content);
+        return "redirect:/todo";
+    }
+
+    @PostMapping("/todo/delete/{idx}")
+    public String todoDelete(@PathVariable Integer idx){
+        this.toDoService.delete(idx);
+        return "redirect:/todo";
+    }
+
+    @PostMapping("/todo/update/{idx}")
+    public String todoUpdate(@PathVariable Integer idx, @RequestParam String content){
+        this.toDoService.update(idx, content);
+        return "redirect:/todo";
+    }
+
+    @PostMapping("/todo/change/{idx}")
+    public String toggleTodoStatus(@PathVariable Integer idx) {
+        ToDoEntity todo = this.toDoService.findById(idx);
+        if (todo != null) {
+            Integer currentStatus = todo.getCompleted();
+            if (currentStatus != null) {
+                this.toDoService.changeStatus(idx, currentStatus == 0 ? 1 : 0);
+            }
+        }
+        return "redirect:/todo";
+
+    }
 }
